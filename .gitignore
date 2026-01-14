@@ -54,3 +54,6 @@ artifacts/
 # Visual Studio Code
 .vscode/
 
+# Reference solution (keep local only)
+CODE_REFERENCE.txt
+
