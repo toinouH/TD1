@@ -5,16 +5,52 @@ namespace MyConsoleApp
 {
     class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            // TODO : 
-            // 1. Créer une instance de AnnuaireService
-            // 2. Appeler InitListePersonnes() pour initialiser les données
-            // 3. Créer une boucle while avec un menu interactif
-            // 4. Gérer les choix utilisateur (1: Lister, 2: Créer, 3: Supprimer, 4: Quitter)
-            
-            // À compléter par l'étudiant - Voir CODE_REFERENCE.txt pour la solution
-            throw new NotImplementedException();
+            var service = new AnnuaireService();
+            service.InitListePersonnes();
+
+            bool quitter = false;
+            while (!quitter)
+            {
+                AfficherMenu();
+                Console.Write("Votre choix (1-4) : ");
+                var input = Console.ReadLine();
+
+                if (!int.TryParse(input, out int choix))
+                {
+                    Console.WriteLine("Entrée invalide. Veuillez saisir un nombre entre 1 et 4.");
+                    Console.WriteLine("Appuyez sur Entrée pour continuer...");
+                    Console.ReadLine();
+                    continue;
+                }
+
+                switch (choix)
+                {
+                    case 1:
+                        ListerPersonnes(service);
+                        break;
+                    case 2:
+                        CreerPersonne(service);
+                        break;
+                    case 3:
+                        SupprimerPersonne(service);
+                        break;
+                    case 4:
+                        quitter = true;
+                        break;
+                    default:
+                        Console.WriteLine("Choix inconnu. Veuillez sélectionner une option entre 1 et 4.");
+                        break;
+                }
+
+                if (!quitter)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Appuyez sur Entrée pour revenir au menu...");
+                    Console.ReadLine();
+                }
+            }
         }
 
         static void AfficherMenu()
